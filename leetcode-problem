@@ -1,0 +1,21 @@
+//******** C++ Solution **********/
+class Solution {
+public:
+    int numberOfPoints(vector<vector<int>>& nums) {
+        vector<int> freq(102, 0);
+        for (const vector<int>& l : nums) {
+            int start = l[0];
+            int end = l[1];
+            freq[start]++;
+            freq[end + 1]--;
+        }
+        int cnt = 0;
+        for (int i = 1; i < 102; i++) {
+            freq[i] += freq[i - 1];
+            if (freq[i] > 0) {
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
